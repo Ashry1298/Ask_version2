@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\QuestionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,22 +15,27 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::middleware('IsLogin')->group(function()
-{
-    Route::get("/profile",[HomeController::class,"profile"])->name("home.profile"); 
+
+Route::middleware('IsLogin')->group(function () {
+    Route::get("/all", [QuestionController::class, 'all'])->name('questions.all');
+    Route::get('/show/{id}', [QuestionController::class, 'show'])->name('question.show');
+    Route::post('/answer/{id}', [QuestionController::class, 'answer'])->name('answer.store');
+    Route::post("/store", [QuestionController::class, "store"])->name("question.store");
+    Route::get("/logout", [AuthController::class, "logout"])->name("auth.logout");
+    Route::get("/profile", [HomeController::class, "profile"])->name("profile.index");
+    Route::get("/profile/{username}", [HomeController::class, "search"])->name("profile.search");
 });
 
 
 Route::get('/', function () {
     return view('welcome');
 });
-//Authentication Routes
 //Register 
-Route::get("/register",[AuthController::class,"register"])->name("auth.register");
-Route::post("/register",[AuthController::class,"handleregister"])->name("auth.handleregister");
-
+Route::get("/register", [AuthController::class, "register"])->name("auth.register");
+Route::post("/register", [AuthController::class, "handleregister"])->name("auth.handleregister");
 // Login 
-Route::get("/login",[AuthController::class,"login"])->name("auth.login");
-Route::post("/login",[AuthController::class,"handlelogin"])->name("auth.handlelogin");
-//logout
-Route::get("/logout",[AuthController::class,"logout"])->name("auth.logout");
+Route::get("/login", [AuthController::class, "login"])->name("auth.login");
+Route::post("/login", [AuthController::class, "handlelogin"])->name("auth.handlelogin");
+//profile
+
+Route::post("/Question/{id}", [QuestionController::class, "AskQuestion"])->name("profile.AskQuestion");

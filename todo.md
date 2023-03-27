@@ -22,6 +22,18 @@ User hasMany questions and questions are belongsTo one user
 user -> questions      1 -> m //sender
 user -> questions      1 -> m //reciever
 
+
+
+=======================
+Questions ---- Users 
+One User hasMany Questions 
+Many Questions are belongsTo One User
+
+
+
+
+
+=========================
 -----------
 followers
 follower_id

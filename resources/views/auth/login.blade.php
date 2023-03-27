@@ -23,7 +23,7 @@
             <label class="form-label">
                 Email
             </label>
-            <input type="email" class="form-control" name="email">
+            <input type="email" class="form-control" value="{{old('email')}}" name="email">
         </div>
         <div class="mb-3">
             <label class="form-label">

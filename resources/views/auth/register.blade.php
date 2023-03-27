@@ -15,19 +15,19 @@
 		<label class="form-label">
 			Name
 		</label>
-		<input type="text" class="form-control" name="name">
+		<input type="text" class="form-control" value="{{old('name')}}" name="name">
 	</div>
 	<div class="mb-3">
 		<label class="form-label">
 			User Name
 		</label>
-		<input type="text" class="form-control" name="username">
+		<input type="text" class="form-control" value="{{old('username')}}"name="username">
 	</div>
 	<div class="mb-3">
 		<label class="form-label">
 			Email
 		</label>
-		<input type="email" class="form-control"  name="email">
+		<input type="email" class="form-control" value="{{old('email')}}"  name="email">
 	</div>
 	<div class="mb-3">
 		<label class="form-label">
