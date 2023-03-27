@@ -2,10 +2,9 @@
 @section('title')
     Registration page
 @endsection
-
-
 @section("content")
 @include('inc/errors')
+@guest
 <form action="{{route('auth.handleregister')}}" method="post"  class="shadow p-4 rounded mt-5" style="width: 90%; max-width: 50rem;">
 	@csrf
 	<h1 class="text-center pb-5 display-4 fs-3">
@@ -40,5 +39,5 @@
 		submit</button>
 </form>
 </div>
-
+@endguest
 @endsection
