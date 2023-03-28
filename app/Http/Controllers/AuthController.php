@@ -10,11 +10,6 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-    //
-    public function register()
-    {
-        return view("auth/register");
-    }
 
     public function handleregister(Request $request)
     {
@@ -31,12 +26,6 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
         return redirect(route("auth.login"));
-    }
-
-
-    public function login()
-    {
-        return view("auth.login");
     }
 
     public function handlelogin(Request $request)
@@ -61,12 +50,6 @@ class AuthController extends Controller
         Auth::logout();
         return redirect()->route('auth.login');
 
-    }
-
-    public function userfind(User $user)
-    {
-        dd($user);
-        
     }
     public function search(User $username)
     {

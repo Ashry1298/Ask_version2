@@ -36,9 +36,9 @@ Route::middleware('IsLogin')->group(function () {
 //Middleware 2
 Route::middleware('Isnot_Login')->group(function () {
     Route::name('auth.')->group(function () {
-        Route::get("/register", [AuthController::class, "register"])->name("register");
+        Route::view("/register", 'auth.register')->name('register');
+        Route::view("/login", 'auth.login')->name('login');
         Route::post("/register", [AuthController::class, "handleregister"])->name("handleregister");
-        Route::get("/login", [AuthController::class, "login"])->name("login");
         Route::post("/login", [AuthController::class, "handlelogin"])->name("handlelogin");
     });
 });
