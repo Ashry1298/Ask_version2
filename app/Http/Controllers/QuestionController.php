@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class QuestionController extends Controller
 {
-
     public function store(Request $request)
     {
         $id = Auth::user()->id;
@@ -21,16 +20,11 @@ class QuestionController extends Controller
         ]);
         return redirect()->route('profile.index')->with('succes-submit', 'Your question successfully submitted');
     }
-    public function show($id)
+    public function show(Question $question)
     {
-        $question = Question::where('id', '=', $id)->first();
         return view("profile.show-question", compact('question'));
     }
-    public function all()
-    {
-        return view('profile.allquestion');
-    }
-
+    
     public function AskQuestion(Request $request, $id)
     {
         $request->validate(['content' => 'required|string']);
@@ -41,10 +35,10 @@ class QuestionController extends Controller
         return back();
     }
 
-    public function answer(Request $request, $id)
+    public function answer(Request $request, Question $question)
     {
         $request->validate(['answer' => 'required']);
-        Question::where('id', '=', $id)->update([
+        $question->update([
             'answer' => $request->answer,
             'answered_at' => now(),
             'is_answered' => true

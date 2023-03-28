@@ -24,9 +24,9 @@
                 </form>
             </div>
         @else
-            <div class="text-center alert alert-danger "  role="alert">
-                {{ 'Sorry you have answered this question before' }}
+            <div class="text-center alert alert-danger " role="alert">
+                {{ 'You have answered this question before' }}
             </div>
-            <a class="btn btn-secondary" href="{{route('profile.index')}}">Back</a>
+            <a class="btn btn-secondary" href="{{ route('profile.index') }}">Back</a>
     @endif
 @endsection

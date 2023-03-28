@@ -42,7 +42,7 @@
                     @if (!$question->answer)
                     <ul>
                         <li>{{"Answer this question: "}}</li>
-                        <a class="btn btn-secondary" href="{{ route('question.show',$question->id) }}">Answer</a>
+                        <a class="btn btn-secondary" href="{{ route('questions.show',$question->id) }}">Answer</a>
                     </ul>
                         
                     @else

@@ -15,28 +15,33 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+//Middleware 1
+Route::middleware('IsLogin')->group(function () {
+    Route::name('profile.')->group(function () {
+        Route::get("/profile", [HomeController::class, "profile"])->name("index");
+        Route::post("/Question/{id}", [QuestionController::class, "AskQuestion"])->name("AskQuestion");
+    });
+    Route::name('questions.')->group(function () {
+        Route::view("all", 'profile.all')->name('all');
+        Route::post("/store", [QuestionController::class, "store"])->name("store");
+        Route::get('/show/{question:id}', [QuestionController::class, 'show'])->name('show');
+    });
 
+    Route::name('auth.')->group(function () {
+        Route::get("/logout", [AuthController::class, "logout"])->name("logout");
+        Route::get("/user/{username:username}", [AuthController::class, "search"])->name("search");
+    });
+    Route::post('/answer/{question:id}', [QuestionController::class, 'answer'])->name('answer.store');
+});
+//Middleware 2
+Route::middleware('Isnot_Login')->group(function () {
+    Route::name('auth.')->group(function () {
+        Route::get("/register", [AuthController::class, "register"])->name("register");
+        Route::post("/register", [AuthController::class, "handleregister"])->name("handleregister");
+        Route::get("/login", [AuthController::class, "login"])->name("login");
+        Route::post("/login", [AuthController::class, "handlelogin"])->name("handlelogin");
+    });
+});
 Route::get('/', function () {
     return view('welcome');
-});
-
-Route::middleware('IsLogin')->group(function () {
-    Route::get("/all", [QuestionController::class, 'all'])->name('questions.all');
-    Route::get('/show/{id}', [QuestionController::class, 'show'])->name('question.show');
-    Route::post('/answer/{id}', [QuestionController::class, 'answer'])->name('answer.store');
-    Route::post("/store", [QuestionController::class, "store"])->name("question.store");
-    Route::get("/profile", [HomeController::class, "profile"])->name("profile.index");
-    Route::get("/profile/{username}", [HomeController::class, "search"])->name("profile.search");
-    Route::get("/logout", [AuthController::class, "logout"])->name("auth.logout");
-});
-
-Route::post("/Question/{id}", [QuestionController::class, "AskQuestion"])->name("profile.AskQuestion");
-Route::get('/greeting', function () {
-    return 'Hello World';
-});
-Route::middleware('Isnot_Login')->group(function () {
-    Route::get("/register", [AuthController::class, "register"])->name("auth.register");
-    Route::post("/register", [AuthController::class, "handleregister"])->name("auth.handleregister");
-    Route::get("/login", [AuthController::class, "login"])->name("auth.login");
-    Route::post("/login", [AuthController::class, "handlelogin"])->name("auth.handlelogin");
 });

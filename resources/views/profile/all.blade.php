@@ -11,7 +11,7 @@
     @foreach (Auth::user()->questions as $question)
     <ul>
         <li>{{ $question->content }}</li>
-        <a class="btn btn-secondary" href="{{route('question.show',$question->id)}}">Answer</a>
+        <a class="btn btn-secondary" href="{{route('questions.show',$question->id)}}">Answer</a>
     </ul>
     @endforeach
 </div>

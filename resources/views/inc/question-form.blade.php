@@ -1,5 +1,5 @@
 
-<form action="{{route('question.store')}}" method="POST">
+<form action="{{route('questions.store')}}" method="POST">
     @csrf
     <div class="form-floating">
         <textarea class="form-control" name="content" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>

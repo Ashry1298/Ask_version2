@@ -63,5 +63,14 @@ class AuthController extends Controller
 
     }
 
+    public function userfind(User $user)
+    {
+        dd($user);
+        
+    }
+    public function search(User $username)
+    {
+      return view('auth.search', compact('username')); 
+    }
    
 }
